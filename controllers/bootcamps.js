@@ -2,14 +2,14 @@
 // @route   GET /api/v1/bootcamps
 // @access  Pulic
 exports.getBootcamps = (req, res, next) => {
-  res.status(200).json({ success: true, msg: `Get bootcamp ${req.params.id}` });
+  res.status(200).json({ success: true, msg: `Show all bootcamps ${req.params.id}` });
 }
 
 // @desc    Get single bootcamp
 // @route   GET /api/v1/bootcamps/:id
 // @access  Pulic
 exports.getBootcamp = (req, res, next) => {
-  res.status(200).json({ success: true, msg: `Get bootcamp ${req.params.id}` });
+  res.status(200).json({ success: true, msg: `Show bootcamp ${req.params.id}` });
 }
 
 // @desc    Create new bootcamp
