@@ -5,7 +5,7 @@ const Bootcamp = require('../models/Bootcamp');
 
 // @desc    Get all bootcamps
 // @route   GET /api/v1/bootcamps
-// @access  Pulic
+// @access  Pubic
 exports.getBootcamps = asyncHandler(async (req, res, next) => {
   let query;
 
