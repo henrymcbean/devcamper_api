@@ -9,6 +9,9 @@ const {
   bootcampPhotoUpload
 } = require('../controllers/bootcamps');
 
+const Bootcamp = require('../models/Bootcamp');
+const advanceResults = require('../middleware/advanceResults');
+
 // Include other resource routers
 const courseRouter = require('./courses');
 
@@ -22,7 +25,7 @@ router.route('/radius/:zipcode/:distance').get(getBootcampsInRadius);
 router.route('/:id/photo').put(bootcampPhotoUpload);
 
 router.route('/')
-  .get(getBootcamps)
+  .get(advanceResults(Bootcamp, 'course'), getBootcamps)
   .post(createBootcamp);      // Note even though the bootcampId is passed in url
                               // we are still using the '/' as route for the POST
 router.route('/:id')
