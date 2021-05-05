@@ -17,20 +17,22 @@ const courseRouter = require('./courses');
 
 const router = express.Router();
 
+const { protect } = require('../middleware/auth');
+
 // Re-route into other resource router - will call course route '/'
 router.use('/:bootcampId/courses', courseRouter);
 
 router.route('/radius/:zipcode/:distance').get(getBootcampsInRadius);
 
-router.route('/:id/photo').put(bootcampPhotoUpload);
+router.route('/:id/photo').put(protect, bootcampPhotoUpload);
 
 router.route('/')
   .get(advanceResults(Bootcamp, 'course'), getBootcamps)
-  .post(createBootcamp);      // Note even though the bootcampId is passed in url
+  .post(protect, createBootcamp);      // Note even though the bootcampId is passed in url
                               // we are still using the '/' as route for the POST
 router.route('/:id')
   .get(getBootcamp)
-  .put(updateBootcamp)
-  .delete(deleteBootcamp);
+  .put(protect, updateBootcamp)
+  .delete(protect, deleteBootcamp);
 
 module.exports = router;
