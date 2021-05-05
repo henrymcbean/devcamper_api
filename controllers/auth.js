@@ -24,3 +24,36 @@ exports.register = asyncHandler(async (req, res, next) => {
 
   next();
 });
+
+// @desc    Login user
+// @route   POST /api/v1/auth/login
+// @access  Pulic
+exports.login = asyncHandler(async (req, res, next) => {
+  const { email, password } = req.body;
+
+  // Validate email & password
+  if (!email || !password) {
+    return next(new ErrorResponse('Please provide an email and password', 400));
+  }
+
+  // Check for user
+  const user = await User.findOne({ email: email }).select('+password');
+
+  if (!user) {
+    return next(new ErrorResponse('Invalid credentials', 401));
+  }
+
+  // Check if password matches
+  const isMatch = user.matchPassword(password);
+
+  if (!isMatch) {
+    return next(new ErrorResponse('Invalid credentials', 401));
+  }
+
+  // Create token
+  const token = user.getSignedJwtToken();
+
+  res.status(200).json({ success: true, token })
+
+  next();
+});
