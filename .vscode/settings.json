@@ -9,6 +9,7 @@
     "forgotpassword",
     "maxlength",
     "resetpassword",
+    "resettoken",
     "scholarhips",
     "sendemail",
     "virtuals",
