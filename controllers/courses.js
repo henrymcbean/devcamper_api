@@ -83,7 +83,7 @@ exports.updateCourse = asyncHandler(async (req, res, next) => {
   // Make sure user is course owner
   if (course.user.toString() !== req.user.id && req.user.role !== 'admin') {
     return next(
-      new ErrorResponse(`User ${req.user.id} is not authorized to update course ${course._id}`, 401)
+      new ErrorResponse(`User ${req.user.id} is not authorized to update course ${course._id} `, 401)
     );
   }
 
@@ -110,7 +110,7 @@ exports.deleteCourse = asyncHandler(async (req, res, next) => {
   // Make sure user is course owner
   if (course.user.toString() !== req.user.id && req.user.role !== 'admin') {
     return next(
-      new ErrorResponse(`User ${req.user.id} is not authorized to delete course ${course._id}`, 401)
+      new ErrorResponse(`User ${req.user.id} is not authorized to delete course ${course._id} at bootcamp ${bootcamp._id}`, 401)
     );
   }
 
