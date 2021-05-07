@@ -58,13 +58,6 @@ exports.createReview = asyncHandler(async (req, res, next) => {
     );
   }
 
-  // Make sure user is bootcamp owner
-  if (bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
-    return next(
-      new ErrorResponse(`User ${req.user.id} is not authorized to add a course to bootcamp ${bootcamp._id}`, 401)
-    );
-  }
-
   const review = await Review.create(req.body);
 
   res.status(201).json({ success: true, data: review });
