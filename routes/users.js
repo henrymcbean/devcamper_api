@@ -1,4 +1,5 @@
 const express = require('express');
+const User = require('../models/User');
 
 const {
   getUsers,
@@ -8,19 +9,20 @@ const {
   deleteUser,
 } = require('../controllers/users');
 
-const User = require('../models/User');
-
 const router = express.Router();
 
 const advanceResults = require('../middleware/advanceResults');
 const { protect, authorize } = require('../middleware/auth');
 
+router.use(protect);
+router.use(authorize('admin'))
+
 router.route('/')
-  .get(protect, authorize('admin'), advanceResults(User), getUsers)
-  .post(protect, authorize('admin'), createUser);
+  .get(advanceResults(User, ''), getUsers)
+    .post(createUser);
 
   router.route('/:id')
-  .get(protect, authorize('admin'), getUser)
+  .get(getUser)
   .put(protect, authorize('admin'), updateUser)
   .delete(protect, authorize('admin'), deleteUser);
 
