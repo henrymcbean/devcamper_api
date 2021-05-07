@@ -1,7 +1,8 @@
 const express = require('express');
 
 const {
-  getReviews
+  getReviews,
+  getReview
 } = require('../controllers/reviews');
 
 const Review = require('../models/Review');
@@ -17,11 +18,8 @@ router.route('/')
     select: 'name description'
   }), getReviews);
 
-// const advanceResults = require('../middleware/advanceResults');
-// const { protect, authorize } = require('../middleware/auth');
-
-// router.route('/:id')
-// .get(getCourse)
+router.route('/:id')
+.get(getReview);
 // .put(protect, authorize('publisher', 'admin'), updateCourse)
 // .delete(protect, authorize('publisher', 'admin'), deleteCourse);
 
