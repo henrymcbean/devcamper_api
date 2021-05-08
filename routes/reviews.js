@@ -4,6 +4,8 @@ const {
   getReviews,
   getReview,
   createReview,
+  updateReview,
+  deleteReview
 } = require('../controllers/reviews');
 
 const Review = require('../models/Review');
@@ -24,8 +26,15 @@ router
   )
   .post(protect, authorize('user', 'admin'), createReview);
 
-// router.route('/:id').get(getReview);
-// .put(protect, authorize('publisher', 'admin'), updateCourse)
+router
+  .route('/:id')
+  .get(getReview)
+  .put(protect, authorize('user', 'admin'), updateReview)
+  .delete(protect, authorize('user', 'admin'), deleteReview);
 // .delete(protect, authorize('publisher', 'admin'), deleteCourse);
+
+// router
+//     .route('/:bootcampId/:id')
+//     .put(protect, authorize('user', 'admin'), updateReview)
 
 module.exports = router;

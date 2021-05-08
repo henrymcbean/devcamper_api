@@ -22,7 +22,6 @@ const { protect, authorize } = require('../middleware/auth');
 
 // Re-route into other resource router - will call course route '/'
 router.use('/:bootcampId/courses', courseRouter);
-router.use('/:bootcampId/reviews', reviewRouter);
 
 router.route('/radius/:zipcode/:distance').get(getBootcampsInRadius);
 
