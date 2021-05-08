@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const colors = require('colors');
 const fileupload = require('express-fileupload');
 const cookieParser = require('cookie-parser');
+const mongoSanitize = require('express-mongo-sanitize');
 const errorHandler = require('./middleware/error');
 const connectDB = require('./config/db');
 
@@ -25,6 +26,9 @@ const app = express();
 
 // Body parser
 app.use(express.json());
+
+// Sanitize data
+app.use(mongoSanitize());
 
 // Cookie Parser
 app.use(cookieParser());
