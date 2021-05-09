@@ -36,7 +36,15 @@ app.use(express.json());
 app.use(mongoSanitize());
 
 // Set security headers
-app.use(helmet());
+app.use(helmet.contentSecurityPolicy({
+  useDefaults: true,
+  directives: {
+    "script-src": ["'self'", "https://code.jquery.com/jquery-1.12.4.js"],
+    "default-src": 'self',
+    "style-src": null,
+  },
+  reportOnly: true,
+}));
 
 // Prevent XSS attacks
 app.use(xss());
