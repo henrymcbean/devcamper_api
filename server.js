@@ -39,9 +39,10 @@ app.use(mongoSanitize());
 app.use(helmet.contentSecurityPolicy({
   useDefaults: true,
   directives: {
-    "script-src": ["'self'", "https://code.jquery.com/jquery-1.12.4.js"],
+    "script-src": ["'self'", 'sha256-ZomnyosL2bmZ79LmErHEhL+1fVaBj9NngvpOK/l4qio='],
     "default-src": 'self',
     "style-src": null,
+    "objectSrc": [`'self'`, `localhost:5000/`],
   },
   reportOnly: true,
 }));
